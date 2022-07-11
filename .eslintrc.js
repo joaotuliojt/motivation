@@ -1,9 +1,14 @@
 module.exports = {
+  "include": [
+    "**/*.config.js", // for *.config.js files
+    "**/*.config.ts", // for *.config.js files
+  ],
   env: {
     browser: true,
     es2021: true,
     node: true,
   },
+
   extends: ["plugin:react/recommended", "airbnb", 'airbnb-typescript', "prettier", "plugin:@typescript-eslint/recommended",],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -41,4 +46,5 @@ module.exports = {
       },
     },
   },
+
 };
