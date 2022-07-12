@@ -1,8 +1,4 @@
 module.exports = {
-  "include": [
-    "**/*.config.js", // for *.config.js files
-    "**/*.config.ts", // for *.config.js files
-  ],
   env: {
     browser: true,
     es2021: true,
