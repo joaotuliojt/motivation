@@ -4,7 +4,6 @@ import cors from "@koa/cors";
 import Router from "koa-router";
 import mount from "koa-mount";
 import { graphqlHTTP } from "koa-graphql";
-import root from "./graphql/root";
 import { schema } from "./graphql/schema";
 
 const app = new Koa();
@@ -20,7 +19,6 @@ app.use(
     "/graphql",
     graphqlHTTP({
       schema,
-      rootValue: root,
       graphiql: true,
     })
   )

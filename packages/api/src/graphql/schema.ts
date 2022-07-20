@@ -1,7 +1,9 @@
-import { buildSchema } from "graphql";
+import { GraphQLSchema } from "graphql";
 
-export const schema = buildSchema(`
-  type Query {
-    hello: String!
-  }
-`);
+import QueryType from "./QueryType";
+import MutationType from "./MutationType";
+
+export const schema = new GraphQLSchema({
+  query: QueryType,
+  mutation: MutationType,
+});
