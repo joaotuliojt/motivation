@@ -8,6 +8,7 @@
     "@types/koa__router": "^8.0.11",
     "dotenv": "^16.0.1",
     "graphql": "^16.5.0",
+    "graphql-playground-middleware-koa": "^1.6.22",
     "koa": "^2.13.4",
     "koa-bodyparser": "^4.3.0",
     "koa-graphql": "^0.12.0",

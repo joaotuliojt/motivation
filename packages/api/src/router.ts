@@ -4,6 +4,8 @@ import cors from "@koa/cors";
 import Router from "koa-router";
 import mount from "koa-mount";
 import { graphqlHTTP } from "koa-graphql";
+import koaPlayground from "graphql-playground-middleware-koa";
+
 import { schema } from "./graphql/schema";
 
 const app = new Koa();
@@ -14,15 +16,19 @@ router.get("/", (ctx, next) => {
   next();
 });
 
-app.use(
-  mount(
-    "/graphql",
-    graphqlHTTP({
-      schema,
-      graphiql: true,
-    })
-  )
-);
+const graphqlServer = graphqlHTTP({
+  schema,
+  graphiql: true,
+});
+
+router.all("/graphql", graphqlServer);
+
+router.all(
+  "/playground",
+  koaPlayground({
+    endpoint: "/graphql",
+  })
+
 
 app.use(KoaBodyparser());
 app.use(cors());
