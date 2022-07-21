@@ -2,7 +2,6 @@ import Koa from "koa";
 import KoaBodyparser from "koa-bodyparser";
 import cors from "@koa/cors";
 import Router from "koa-router";
-import mount from "koa-mount";
 import { graphqlHTTP } from "koa-graphql";
 import koaPlayground from "graphql-playground-middleware-koa";
 
@@ -28,7 +27,7 @@ router.all(
   koaPlayground({
     endpoint: "/graphql",
   })
-
+);
 
 app.use(KoaBodyparser());
 app.use(cors());
