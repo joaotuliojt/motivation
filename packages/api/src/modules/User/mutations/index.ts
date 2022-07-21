@@ -1,3 +1,4 @@
 import CreateUser from "./CreateUser";
+import AuthUser from "./auth";
 
-export default { CreateUser };
+export default { CreateUser, AuthUser };

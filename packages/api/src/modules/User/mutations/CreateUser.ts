@@ -42,7 +42,7 @@ export default mutationWithClientMutationId({
     },
     success: {
       type: GraphQLString,
-      resolve: ({ error }: { error: string }) => error,
+      resolve: ({ success }: { success: string }) => success,
     },
   },
 });
