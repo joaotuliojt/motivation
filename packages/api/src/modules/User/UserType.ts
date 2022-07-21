@@ -1,17 +1,17 @@
 import { GraphQLObjectType, GraphQLString, GraphQLID } from "graphql";
+import { globalIdField, connectionDefinitions } from "graphql-relay";
 import { IUser } from "./models/User";
 
-export const UserType = new GraphQLObjectType<IUser>({
+const UserType = new GraphQLObjectType<IUser>({
   name: "User",
   description: "User model",
   fields: {
+    id: globalIdField("User"),
     email: {
       type: GraphQLString,
-      description: "Email of user",
     },
     name: {
       type: GraphQLString,
-      description: "User name",
     },
     password: {
       type: GraphQLString,
@@ -21,3 +21,11 @@ export const UserType = new GraphQLObjectType<IUser>({
     },
   },
 });
+
+const { connectionType: UserConnection, edgeType: UserEdge } = connectionDefinitions({
+  nodeType: UserType,
+});
+
+export { UserConnection, UserEdge };
+
+export default UserType;
