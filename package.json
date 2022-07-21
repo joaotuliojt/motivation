@@ -3,14 +3,30 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "dependencies": {
-    "lerna": "^5.1.8",
-    "nodemon": "^2.0.19"
+  "private": true,
+  "workspaces":{
+    "packages": [
+      "packages/*"
+    ]
+  },
+    "scripts": {
+    "prepare": "husky install",
+    "commit": "git-cz",
+    "dev:server": "yarn workspace @motivation/api dev"
   },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
+  },
+    "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "lerna": "^5.1.8",
+    "nodemon": "^2.0.19"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
@@ -32,14 +48,5 @@
     "husky": "^8.0.1",
     "prettier": "^2.7.1",
     "typescript": "^4.7.4"
-  },
-  "scripts": {
-    "prepare": "husky install",
-    "commit": "git-cz"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }
