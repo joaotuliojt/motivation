@@ -12,7 +12,7 @@ async function startServer() {
     console.log("Server error", err);
   });
 
-  app.listen(3333, () => {
+  app.listen(4000, () => {
     console.log("Server is running");
   });
 }
