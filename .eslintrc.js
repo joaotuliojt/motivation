@@ -24,6 +24,9 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": 0,
     "prettier/prettier": ["error"],
     "import/prefer-default-export": "off",
+    "class-methods-use-this": "off",
+    "no-underscore-dangle": "off",
+    "import/no-cycle": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
