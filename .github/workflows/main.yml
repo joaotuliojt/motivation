@@ -1,9 +1,9 @@
 name: Demo GitHub Actions
 on:
   push:
-    branches: [main, develop]
+    branches: [master, develop]
   pull_request:
-    branches: [main, develop]
+    branches: [master, develop]
 jobs:
   test-job:
     runs-on: ubuntu-latest
@@ -15,9 +15,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "17.x"
-        uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: yarn
-        uses: borales/actions-yarn@v3.0.0
-        with:
-          cmd: yarn test
+      - name: Install dependencies
+        run: yarn
+      - name:
+        cmd: yarn jest
+
+      - name: Code Coverage
+        uses: codecov/codecov-action@v1
