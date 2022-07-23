@@ -2,3 +2,5 @@
 dist
 node_modules
 README
+__tests__
+test
