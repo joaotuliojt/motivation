@@ -1,0 +1,23 @@
+name: Demo GitHub Actions
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node 17.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: "17.x"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Test
+        run: npm test
