@@ -15,9 +15,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "17.x"
-
-      - name: Install dependencies
-        run: npm i --force
-
-      - name: Test
-        run: npm run test
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: yarn
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: yarn test
