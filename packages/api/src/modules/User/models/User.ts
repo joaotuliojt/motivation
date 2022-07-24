@@ -1,3 +1,4 @@
+import { hash } from "bcrypt";
 import { Document, Model, Schema, model } from "mongoose";
 
 export interface IUser extends Document {
@@ -12,6 +13,7 @@ const UserSchema = new Schema<IUser>(
     email: {
       type: String,
       required: true,
+      unique: true,
     },
     name: {
       type: String,
@@ -30,5 +32,12 @@ const UserSchema = new Schema<IUser>(
     timestamps: true,
   }
 );
+
+// eslint-disable-next-line func-names
+UserSchema.pre("save", async function (next) {
+  const hashedPassword = await hash(this.password, 8);
+  this.password = hashedPassword;
+  next();
+});
 
 export const User: Model<IUser> = model("user", UserSchema);
