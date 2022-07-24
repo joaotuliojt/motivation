@@ -18,8 +18,11 @@ export default mutationWithClientMutationId({
     },
   },
   mutateAndGetPayload: async ({ email, name, password }) => {
-    const hashedPassoword = await hash(password, 8);
-    const user = await User.create({ email, name, password: hashedPassoword });
+    const hasUser = (await User.findOne({ email }).countDocuments()) > 0;
+    if (hasUser) {
+      throw new Error("This email is already in use");
+    }
+    const user = await User.create({ email, name, password });
     return {
       user,
     };
