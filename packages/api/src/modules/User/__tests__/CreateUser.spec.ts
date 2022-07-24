@@ -6,7 +6,7 @@ import { schema } from "../../../graphql/schema";
 describe("Create User tests", () => {
   beforeAll(async () => await connectMongoose());
   beforeEach(async () => await clearDatabase())
-  afterAll(async () => await clearDatabase())
+  afterAll(async () => await closeDatabase())
 
   it("should create a user", async () => {
     const query = `

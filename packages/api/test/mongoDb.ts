@@ -7,9 +7,8 @@ async function connectMongoose() {
 async function closeDatabase() {
   await mongoose.connection.dropDatabase();
   await mongoose.connection.close();
-  const instance = global.__MONGOINSTACE;
-  console.log(globalThis)
-  await instance.stop();
+  /* const instance = global.__MONGOINSTACE;
+  await instance.stop(); */
 }
 
 async function clearDatabase() {
