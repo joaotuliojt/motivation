@@ -1,0 +1,85 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\joaot\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js
+
+PATH: 
+  C:\Python310\Scripts\;C:\Python310\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\Users\joaot\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Program Files\OpenJDK\openjdk-11.0.15_10\bin;C:\Android\Sdk\emulator;C:\Android\Sdk\tools;C:\Android\Sdk\tools\bin;C:\Android\Sdk\platform-tools;C:\Users\joaot\AppData\Local\Yarn\bin;;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\joaot\AppData\Local\Microsoft\WindowsApps;C:\Users\joaot\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\joaot\AppData\Roaming\npm;C:\Users\joaot\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\joaot\AppData\Local\Programs\oh-my-posh\bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.15.1
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EACCES: permission denied, lstat 'C:\Workspace\desafio-seraphini\node_modules\@motivation\api'
+
+npm manifest: 
+  {
+    "name": "motivation",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "private": true,
+    "workspaces": {
+      "packages": [
+        "packages/*"
+      ]
+    },
+    "scripts": {
+      "prepare": "husky install",
+      "commit": "git-cz",
+      "dev:server": "yarn workspace @motivation/api dev",
+      "test": "jest"
+    },
+    "husky": {
+      "hooks": {
+        "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      }
+    },
+    "config": {
+      "commitizen": {
+        "path": "./node_modules/cz-conventional-changelog"
+      }
+    },
+    "dependencies": {
+      "lerna": "^5.1.8",
+      "nodemon": "^2.0.19"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.18.9",
+      "@babel/preset-env": "^7.18.9",
+      "@babel/preset-typescript": "^7.18.6",
+      "@commitlint/cli": "^17.0.3",
+      "@commitlint/config-conventional": "^17.0.3",
+      "@types/jest": "^28.1.6",
+      "@types/node": "^18.0.3",
+      "@typescript-eslint/eslint-plugin": "^5.30.5",
+      "@typescript-eslint/parser": "^5.30.5",
+      "babel-jest": "^28.1.3",
+      "commitizen": "^4.2.5",
+      "cz-conventional-changelog": "3.3.0",
+      "eslint": "^7.32.0 || ^8.2.0",
+      "eslint-config-airbnb": "^19.0.4",
+      "eslint-config-airbnb-typescript": "^17.0.0",
+      "eslint-config-prettier": "^8.5.0",
+      "eslint-plugin-import": "^2.25.3",
+      "eslint-plugin-jsx-a11y": "^6.5.1",
+      "eslint-plugin-prettier": "^4.2.1",
+      "eslint-plugin-react": "^7.28.0",
+      "eslint-plugin-react-hooks": "^4.3.0",
+      "husky": "^8.0.1",
+      "jest": "^28.1.3",
+      "prettier": "^2.7.1",
+      "ts-jest": "^28.0.7",
+      "typescript": "^4.7.4"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

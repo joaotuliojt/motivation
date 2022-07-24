@@ -1,12 +1,11 @@
 import { graphql } from "graphql";
-import { connectMongoose, clearDatabase, closeDatabase } from "../../../../test/mongoDb";
-import { User } from "../models/User";
+import { fromGlobalId } from "graphql-relay";
+import { connectMongoose, clearDatabase } from "../../../../test/mongoDb";
 import { schema } from "../../../graphql/schema";
 
 describe("Create User tests", () => {
   beforeAll(async () => connectMongoose());
   beforeEach(async () => clearDatabase());
-  afterAll(async () => closeDatabase());
 
   it("should query user", async () => {
 
@@ -17,11 +16,13 @@ describe("Create User tests", () => {
           name: $name,
           password:$password
         }){
-          ... on User{
-            email
-            name
-            id
-            _id
+          ... on CreateUserPayload{
+            user{
+              email
+              name
+              id
+              _id
+            }
           }
         }
       }
@@ -34,6 +35,7 @@ describe("Create User tests", () => {
     }
 
     const result = await graphql({ schema, source: query, variableValues: variables });
-    expect(result.data).not.toBe(null);
+    const { user } = result.data?.CreateUser as any;
+    expect(user).not.toBeFalsy();
   });
 });

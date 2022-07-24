@@ -12,7 +12,6 @@ async function closeDatabase() {
 }
 
 async function clearDatabase() {
-  jest.setTimeout(20000);
   const { db } = mongoose.connection;
   await db.dropDatabase();
 }
