@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: "17.x"
       - run: yarn
-      - run: yarn jest
+      - run: yarn test
 
       - name: Code Coverage
         uses: codecov/codecov-action@v1
