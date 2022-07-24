@@ -2,7 +2,7 @@ import { GraphQLNonNull, GraphQLString } from "graphql";
 import { mutationWithClientMutationId } from "graphql-relay";
 import { compare } from "bcrypt";
 import { User } from "../models/User";
-import { JwtCreateAuthorizationToken } from "../../../services/token/jwt/jwt";
+import { createAuthorization } from "../../../utils/jwt";
 import UserType from "../UserType";
 
 export default mutationWithClientMutationId({
@@ -36,8 +36,7 @@ export default mutationWithClientMutationId({
       };
     }
 
-    const jwtCreateAuthorizationToken = new JwtCreateAuthorizationToken();
-    const token = await jwtCreateAuthorizationToken.createAuthorization({ _id: user._id, roles: [] });
+    const token = await createAuthorization({ id: user._id, roles: [] });
     return {
       user,
       error: null,

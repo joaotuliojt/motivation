@@ -6,6 +6,7 @@ import { graphqlHTTP } from "koa-graphql";
 import koaPlayground from "graphql-playground-middleware-koa";
 
 import { schema } from "./graphql/schema";
+import { getUser } from "./utils/getUser";
 
 const app = new Koa();
 const router = new Router();
@@ -18,6 +19,10 @@ router.get("/", (ctx, next) => {
 const graphqlServer = graphqlHTTP({
   schema,
   graphiql: true,
+  context: ({ req }) => {
+    const token = req.get("Authorization") || "";
+    return { user: getUser(token.replace("Bearer", "")) };
+  },
 });
 
 router.all("/graphql", graphqlServer);
