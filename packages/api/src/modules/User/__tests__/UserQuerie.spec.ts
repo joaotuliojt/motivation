@@ -4,9 +4,9 @@ import { User } from "../models/User";
 import { schema } from "../../../graphql/schema";
 
 describe("Query user tests", () => {
-  beforeAll(async () => connectMongoose());
-  beforeEach(async () => clearDatabase());
-
+  beforeAll(async () => await connectMongoose());
+  beforeEach(async () => await clearDatabase())
+  afterAll(async () => await clearDatabase())
   it("should query user", async () => {
     const user = await User.create({
       email: "jhondoe@email.com",
