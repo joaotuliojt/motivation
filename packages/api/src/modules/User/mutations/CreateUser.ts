@@ -22,8 +22,6 @@ export default mutationWithClientMutationId({
     const user = await User.create({ email, name, password: hashedPassoword });
     return {
       user,
-      error: null,
-      success: "User created succesfully",
     };
   },
   outputFields: {
@@ -35,14 +33,6 @@ export default mutationWithClientMutationId({
         }
         return user;
       },
-    },
-    error: {
-      type: GraphQLString,
-      resolve: ({ error }: { error: string }) => error,
-    },
-    success: {
-      type: GraphQLString,
-      resolve: ({ success }: { success: string }) => success,
     },
   },
 });
