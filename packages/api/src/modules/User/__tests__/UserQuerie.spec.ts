@@ -3,7 +3,7 @@ import { connectMongoose, clearDatabase, closeDatabase } from "../../../../test/
 import { User } from "../models/User";
 import { schema } from "../../../graphql/schema";
 
-describe("Create user tests", () => {
+describe("Query user tests", () => {
   beforeAll(async () => connectMongoose());
   beforeEach(async () => clearDatabase());
   afterAll(async () => closeDatabase());
