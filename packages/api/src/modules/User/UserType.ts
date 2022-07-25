@@ -1,5 +1,6 @@
 import { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLScalarType } from "graphql";
 import { globalIdField, connectionDefinitions } from "graphql-relay";
+import { MotivationConnection } from "../Motivation/MotivationType";
 import { nodeInterface } from "../node/nodeinterface";
 
 const UserType = new GraphQLObjectType({
@@ -24,7 +25,7 @@ const UserType = new GraphQLObjectType({
       type: new GraphQLScalarType({ name: "UpdatedAt" }),
     },
     motivations: {
-      type: GraphQLID,
+      type: MotivationConnection,
     },
   },
 });
