@@ -18,29 +18,17 @@ export default mutationWithClientMutationId({
   mutateAndGetPayload: async ({ email, password }) => {
     const user = await User.findOne({ email });
     if (!user) {
-      return {
-        user: null,
-        error: "User dont exists",
-        success: null,
-        token: null,
-      };
+      throw new Error("Email or password invalid");
     }
 
     const passwordIsValid = await compare(password, user.password);
     if (!passwordIsValid) {
-      return {
-        user: null,
-        error: "Email or Password incorrect",
-        success: null,
-        token: null,
-      };
+      throw new Error("Email or password invalid");
     }
 
     const token = await createAuthorization({ id: user._id, roles: [] });
     return {
       user,
-      error: null,
-      success: "User authenticated",
       token,
     };
   },
@@ -53,14 +41,6 @@ export default mutationWithClientMutationId({
         }
         return user;
       },
-    },
-    error: {
-      type: GraphQLString,
-      resolve: ({ error }: { error: string }) => error,
-    },
-    success: {
-      type: GraphQLString,
-      resolve: ({ success }: { success: string }) => success,
     },
     token: {
       type: GraphQLString,
