@@ -5,7 +5,9 @@ import Router from "koa-router";
 import { graphqlHTTP } from "koa-graphql";
 import koaPlayground from "graphql-playground-middleware-koa";
 
+import { applyMiddleware } from "graphql-middleware";
 import { schema } from "./graphql/schema";
+import { authMiddleware } from "./middlewares/index";
 
 const app = new Koa();
 const router = new Router();
@@ -15,8 +17,10 @@ router.get("/", (ctx, next) => {
   next();
 });
 
+const schemaWithMiddleware = applyMiddleware(schema, authMiddleware);
+
 const graphqlServer = graphqlHTTP({
-  schema,
+  schema: schemaWithMiddleware,
   graphiql: true,
 });
 
