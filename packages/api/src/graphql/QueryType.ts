@@ -1,7 +1,6 @@
-import { GraphQLID, GraphQLList, GraphQLNonNull, GraphQLObjectType } from "graphql";
-import UserType from "../modules/User/UserType";
+import { GraphQLObjectType } from "graphql";
 import MotivationQueries from "../modules/Motivation/queries";
-import * as UserLoader from "../modules/User/UserLoader";
+import UserQueries from "../modules/User/queries";
 import { nodeField, nodesField } from "../modules/node/nodeinterface";
 
 const QueryType = new GraphQLObjectType({
@@ -9,25 +8,7 @@ const QueryType = new GraphQLObjectType({
   description: "The root of all... queries",
   fields: {
     ...MotivationQueries,
-    users: {
-      type: new GraphQLList(UserType),
-      resolve: async () => {
-        const data = await UserLoader.getUsers();
-        return data;
-      },
-    },
-    user: {
-      type: UserType,
-      args: {
-        id: {
-          type: new GraphQLNonNull(GraphQLID),
-        },
-      },
-      resolve: async (_, { id }) => {
-        const data = await UserLoader.getUser(id);
-        return data;
-      },
-    },
+    ...UserQueries,
     node: nodeField,
     nodes: nodesField,
   },
