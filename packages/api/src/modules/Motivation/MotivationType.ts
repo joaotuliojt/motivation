@@ -16,8 +16,11 @@ const MotivationType = new GraphQLObjectType({
       type: GraphQLString,
     },
     user: {
-      type: UserType,
-      resolve: (source) => null,
+      type: GraphQLString,
+      resolve: (source) => {
+        console.log(source);
+        return null;
+      },
     },
   },
 });
