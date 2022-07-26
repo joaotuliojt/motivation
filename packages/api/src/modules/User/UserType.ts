@@ -1,13 +1,15 @@
-import { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLScalarType } from "graphql";
-import { globalIdField, connectionDefinitions } from "graphql-relay";
-import { MotivationConnection } from "../Motivation/MotivationType";
+import { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLScalarType, GraphQLList } from "graphql";
+import { globalIdField, connectionDefinitions, connectionArgs, connectionFromArray } from "graphql-relay";
+import { getMotivations } from "../Motivation/MotivationLoader";
+import MotivationType, { MotivationConnection } from "../Motivation/MotivationType";
 import { nodeInterface } from "../node/nodeinterface";
 
+console.log(MotivationConnection);
 const UserType = new GraphQLObjectType({
   name: "User",
-  description: "User model",
+  description: "User Type",
   interfaces: [nodeInterface],
-  fields: {
+  fields: () => ({
     id: globalIdField("User"),
     _id: {
       type: GraphQLID,
@@ -26,8 +28,13 @@ const UserType = new GraphQLObjectType({
     },
     motivations: {
       type: MotivationConnection,
+      args: connectionArgs,
+      resolve: async (user, args) => {
+        const data = await getMotivations(user._id);
+        return connectionFromArray([...data], args);
+      },
     },
-  },
+  }),
 });
 
 const { connectionType: UserConnection, edgeType: UserEdge } = connectionDefinitions({
