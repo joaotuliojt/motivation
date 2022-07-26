@@ -25,7 +25,7 @@ const UserSchema = new Schema<IUser>(
     },
     motivations: {
       type: [Schema.Types.ObjectId],
-      ref: "motivations",
+      ref: "motivation",
     },
   },
   {
