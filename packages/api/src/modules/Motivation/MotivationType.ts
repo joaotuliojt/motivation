@@ -8,7 +8,7 @@ const MotivationType = new GraphQLObjectType({
   name: "Motivation",
   description: "Motivation Type",
   interfaces: [nodeInterface],
-  fields: {
+  fields: () => ({
     id: globalIdField("Motivation"),
     sentence: {
       type: GraphQLString,
@@ -24,7 +24,7 @@ const MotivationType = new GraphQLObjectType({
         return user;
       },
     },
-  },
+  }),
 });
 
 const { connectionType: MotivationConnection, edgeType: MotivationEdge } = connectionDefinitions({
