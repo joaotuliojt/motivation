@@ -1,13 +1,14 @@
 import { GraphQLObjectType, GraphQLString } from "graphql";
 import { connectionDefinitions, globalIdField } from "graphql-relay";
 import { nodeInterface } from "../node/nodeinterface";
+import { getUser } from "../User/UserLoader";
 import UserType from "../User/UserType";
 
 const MotivationType = new GraphQLObjectType({
   name: "Motivation",
   description: "Motivation Type",
   interfaces: [nodeInterface],
-  fields: {
+  fields: () => ({
     id: globalIdField("Motivation"),
     sentence: {
       type: GraphQLString,
@@ -16,13 +17,14 @@ const MotivationType = new GraphQLObjectType({
       type: GraphQLString,
     },
     user: {
-      type: GraphQLString,
-      resolve: (source) => {
-        console.log(source);
-        return null;
+      type: UserType,
+      resolve: async (source) => {
+        const { userId } = source;
+        const user = await getUser(userId);
+        return user;
       },
     },
-  },
+  }),
 });
 
 const { connectionType: MotivationConnection, edgeType: MotivationEdge } = connectionDefinitions({
