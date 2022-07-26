@@ -23,7 +23,6 @@ describe("Create motivation tests", () => {
           id
           sentence
           author
-          user
         }
       }
     }`
@@ -60,7 +59,6 @@ describe("Create motivation tests", () => {
           id
           sentence
           author
-          user
         }
       }
     }`
