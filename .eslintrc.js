@@ -18,6 +18,9 @@ module.exports = {
   },
   plugins: ["react", "@typescript-eslint", "prettier"],
   rules: {
+    "react/react-in-jsx-scope": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-props-no-spreading": "off",
     "import/extensions": 1,
     "import/no-named-as-default": 0,
     "@typescript-eslint/strict-boolean-expressions": 0,
