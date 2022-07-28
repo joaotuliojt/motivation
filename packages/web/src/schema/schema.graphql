@@ -1,0 +1,199 @@
+"""
+Exposes a URL that specifies the behavior of this scalar.
+"""
+directive @specifiedBy(
+  """
+  The URL that specifies the behavior of this scalar.
+  """
+  url: String!
+) on SCALAR
+
+input AuthInput {
+  email: String!
+  password: String!
+  clientMutationId: String
+}
+
+type AuthPayload {
+  user: User
+  token: String
+  clientMutationId: String
+}
+
+scalar CreatedAt
+
+input CreateUserInput {
+  email: String!
+  name: String!
+  password: String!
+  clientMutationId: String
+}
+
+type CreateUserPayload {
+  user: User
+  clientMutationId: String
+}
+
+"""
+Motivation Type
+"""
+type Motivation implements Node {
+  """
+  The ID of an object
+  """
+  id: ID!
+  sentence: String
+  author: String
+  user: User
+}
+
+"""
+A connection to a list of items.
+"""
+type MotivationConnection {
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+
+  """
+  A list of edges.
+  """
+  edges: [MotivationEdge]
+}
+
+input MotivationCreateInput {
+  author: String!
+  sentence: String!
+  clientMutationId: String
+}
+
+type MotivationCreatePayload {
+  motivation: Motivation
+  clientMutationId: String
+}
+
+"""
+An edge in a connection.
+"""
+type MotivationEdge {
+  """
+  The item at the end of the edge
+  """
+  node: Motivation
+
+  """
+  A cursor for use in pagination
+  """
+  cursor: String!
+}
+
+"""
+Root of ... mutations
+"""
+type Mutation {
+  CreateUser(input: CreateUserInput!): CreateUserPayload
+  AuthUser(input: AuthInput!): AuthPayload
+  CreateMotivation(input: MotivationCreateInput!): MotivationCreatePayload
+}
+
+"""
+An object with an ID
+"""
+interface Node {
+  """
+  The id of the object.
+  """
+  id: ID!
+}
+
+"""
+Information about pagination in a connection.
+"""
+type PageInfo {
+  """
+  When paginating forwards, are there more items?
+  """
+  hasNextPage: Boolean!
+
+  """
+  When paginating backwards, are there more items?
+  """
+  hasPreviousPage: Boolean!
+
+  """
+  When paginating backwards, the cursor to continue.
+  """
+  startCursor: String
+
+  """
+  When paginating forwards, the cursor to continue.
+  """
+  endCursor: String
+}
+
+"""
+The root of all... queries
+"""
+type Query {
+  motivation(id: ID!): Motivation
+  user(id: ID!): User
+
+  """
+  Fetches an object given its ID
+  """
+  node(
+    """
+    The ID of an object
+    """
+    id: ID!
+  ): Node
+
+  """
+  Fetches objects given their IDs
+  """
+  nodes(
+    """
+    The IDs of objects
+    """
+    ids: [ID!]!
+  ): [Node]!
+}
+
+scalar UpdatedAt
+
+"""
+User Type
+"""
+type User implements Node {
+  """
+  The ID of an object
+  """
+  id: ID!
+  _id: ID
+  email: String
+  name: String
+  createdAt: CreatedAt
+  updatedAt: UpdatedAt
+  motivations(
+    """
+    Returns the items in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the first n items from the list.
+    """
+    first: Int
+
+    """
+    Returns the items in the list that come before the specified cursor.
+    """
+    before: String
+
+    """
+    Returns the last n items from the list.
+    """
+    last: Int
+  ): MotivationConnection
+}
