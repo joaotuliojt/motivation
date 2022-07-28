@@ -13,6 +13,7 @@
     "prepare": "husky install",
     "commit": "git-cz",
     "dev:server": "yarn workspace @motivation/api dev",
+    "dev:web": "yarn workspace @motivation/web dev",
     "test": "jest --runInBand --detectOpenHandles --forceExit"
   },
   "husky": {
